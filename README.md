@@ -11,3 +11,5 @@ To get started:
   - If the tutorial panel does not open or display the walkthrough contents, try refreshing the page.
 
 Then follow the on-screen instructions to set up your repo.
+
+This is a message to Mycale Radcliffe letting him know that the git repository has been configured. Good Job bud. 
