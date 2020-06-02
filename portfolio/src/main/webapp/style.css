@@ -7,3 +7,38 @@
 #greeting-container {
   margin-top: 20px;
 }
+
+body {
+    background-image: url("/images/Maryland.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#banner {
+    background-color: grey;
+    background-image: linear-gradient(red, yellow);
+    position: absolute;
+    top: 0px;
+    left: 0px; 
+    font-size: x-large;
+    height: 200px;
+    width: 100%;
+    z-index: 0
+}
+
+#banner img{
+    position: absolute;
+    border-radius: 50%;
+    top: 0px;
+    right: 0px; 
+    width: 150px;
+    height: 150px;
+    z-index: 1;
+}
+
+#para1 {
+     background : rgba(211, 211, 211, .6);
+     color: rgb(0, 0, 0);
+     font-family: Georgia, 'Times New Roman', Times, serif
+}
