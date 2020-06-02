@@ -40,5 +40,27 @@ body {
 #para1 {
      background : rgba(211, 211, 211, .6);
      color: rgb(0, 0, 0);
-     font-family: Georgia, 'Times New Roman', Times, serif
+     font-family: 'Courier New', Courier, monospace;
+     display: inline-block;
 }
+
+#quote-text{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(10%, -50%);
+}
+
+#tv img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(0%, -50%);
+}
+
+#quote-container{
+    width: 30%;
+    height: 30%; 
+}
+
+
