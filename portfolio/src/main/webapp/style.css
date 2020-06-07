@@ -20,10 +20,8 @@ p {
 }
 
 body {
-    background-color: black; 
+    background-color: lightyellow; 
     background-size: cover;
-    background-position: bottom; 
-    background-position-y: 30%; 
 }
 
 #banner {
@@ -48,31 +46,24 @@ body {
     z-index: 1;
 }
 
-#intro {
-    color: rgb(0, 0, 0);
-    font-family: 'Courier New', Courier, monospace;
-}
 
 #about-me{
     position: absolute;
-    color: white;
+    color: black;
     z-index: 2; 
-    transform: scale(1.6);
-    right: 61%;
-    top: 20%; 
+    transform: scale(1.4);
+    right: 68%;
+    top: 15%; 
     width: 25%;
 }
 
 
-
-
 #hang img{
     position: absolute;
-    top: 19.8%;
-    right: 53.5%;
+    top: 28%;
+    right: 59%;
     height: 830px;
-    width: 40%;
-    transform: scale(1.1);
+    transform: scale(.6);
     z-index: -3;
 }
 
@@ -102,6 +93,19 @@ body {
     width: 35%;
     height: 30%; 
 }
+
+#comments-section {
+    position: absolute;
+    right: 65%;
+    bottom: 13%;
+}
+
+#statement-container{
+    position: absolute;
+    right: 72%;
+    bottom: 9%;
+}
+
 
 /* code for the red button for tv shows */
 
