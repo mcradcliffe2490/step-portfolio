@@ -11,7 +11,7 @@
   </head>
   
 
-  <body>
+  <body onload ="getServerResponse()">
     <div id="banner">
         <h1><strong> Mycale's Website</strong></h1> <a href="/images/sun.gif"><img src = "/images/sun.gif"/></a>
     </div>
@@ -49,11 +49,19 @@
     </div>
 
     <div id = "comments-section">
+        <form action = '/data' method = "POST">
 
-        <div id = "comments-button">
+        <h1>Comments Section</h1>
+        <br/>
+
+        <textarea name = "comments-input">Enter your comment here!</textarea>
+        <input type = "submit">
+        </form>
+
+       <!-- <div id = "comments-button">
             <p><strong>Click to get data from a server</strong></p>
             <button onclick="getServerResponse()">Click me to get response</button>
-        </div>
+        </div> -->
     </div>
     
     <div id = "statement-container"></div>

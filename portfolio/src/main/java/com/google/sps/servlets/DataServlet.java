@@ -34,9 +34,9 @@ public class DataServlet extends HttpServlet {
 
         hardList = new ArrayList<>(); 
 
-        hardList.add("Huston, we don't have a problem");
+        /* hardList.add("Huston, we don't have a problem");
         hardList.add("Hello! My name is DataServlet, and I will be your server for tonight");
-        hardList.add("Reach for the skyyyyyy");
+        hardList.add("Reach for the skyyyyyy"); */
     }
 
     @Override
@@ -49,4 +49,26 @@ public class DataServlet extends HttpServlet {
 
         response.getWriter().println(json);
     }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String text = getParameter(request, "comments-input", "");
+        hardList.add(text + " ");
+
+        Gson gson = new Gson();
+
+        response.setContentType("application/json");
+        String json = gson.toJson(hardList);
+
+        response.getWriter().println(json);
+        response.sendRedirect("/index.html");
+    }
+
+    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
 }
