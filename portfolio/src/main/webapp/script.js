@@ -76,7 +76,8 @@ function addRandomQuote() {
 
   async function getServerResponse() {
       const response = await fetch("/data");
-      const statement = await response.text();
+      const statement = await response.json();
+      console.log(statement); 
       const statementContainer = document.getElementById("statement-container");
       statementContainer.innerText = statement; 
 
