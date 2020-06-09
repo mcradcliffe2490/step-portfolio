@@ -103,11 +103,11 @@ body {
 #statement-container{
     position: absolute;
     right: 72%;
-    bottom: 7%;
+    bottom: 5%;
 }
 
 
-/* code for the red button for tv shows */
+/* Code for the Red Button for TV shows. */
 
 .push_button {
 	position: relative;
@@ -209,7 +209,7 @@ body {
 
 
 
-/*code for the social buttons */
+/*Code for the social buttons. */
 
 .zocial,
 a.zocial {
@@ -267,7 +267,7 @@ a.zocial {
 	outline: none; /* outline is visible on :focus */
 }
 
-/* Buttons can be displayed as standalone icons by adding a class of "icon" */
+/* Buttons can be displayed as standalone icons by adding a class of "icon". */
 
 .zocial.icon {
 	overflow: hidden;

@@ -15,6 +15,12 @@
 package com.google.sps.servlets;
 
 import java.io.IOException;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,53 +28,50 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.ArrayList;
 import com.google.gson.Gson;
+import java.util.Optional;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-    private List<String> hardList;
-
-    @Override
-    public void init() {
-
-        hardList = new ArrayList<>(); 
-
-        /* hardList.add("Huston, we don't have a problem");
-        hardList.add("Hello! My name is DataServlet, and I will be your server for tonight");
-        hardList.add("Reach for the skyyyyyy"); */
-    }
-
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("application/json;");
+
+        Query query = new Query("Comments").addSort("comment-data", SortDirection.DESCENDING);
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
         Gson gson = new Gson();
-        String json = gson.toJson(hardList);
+        ArrayList<String> commentsList = new ArrayList<>();
 
+        PreparedQuery results = datastore.prepare(query);
+        for (Entity entity : results.asIterable()) {
+            commentsList.add((String) entity.getProperty("comment-data"));
+        }
 
-        response.getWriter().println(json);
+        response.setContentType("application/json;");
+        response.getWriter().println(gson.toJson(commentsList));
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String text = getParameter(request, "comments-input", "");
-        hardList.add(text + " ");
-
+        String text = getParameter(request, "comments-input").orElse("");
         Gson gson = new Gson();
 
         response.setContentType("application/json");
-        String json = gson.toJson(hardList);
 
-        response.getWriter().println(json);
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        Entity commentsEntity = new Entity("Comments");
+        commentsEntity.setProperty("comment-data", gson.toJson(text));
+
+        datastore.put(commentsEntity);
+
         response.sendRedirect("/index.html");
     }
 
-    private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
+    private Optional<String> getParameter(HttpServletRequest request, String fieldName) {
+    String value = request.getParameter(fieldName);
+    Optional<String> opt = Optional.ofNullable(value);
+
+    return opt;
     }
-    return value;
-  }
 }
