@@ -10,6 +10,10 @@ p {
     line-height: 24px;
 }
 
+#container {
+    width: 1000px;
+}
+
 #content {
     width: 650px;
     z-index: -1;
@@ -48,44 +52,46 @@ body {
 
 
 #about-me{
-    position: absolute;
+    position: relative;
     color: black;
     z-index: 2; 
     transform: scale(1.4);
-    right: 68%;
-    top: 15%; 
-    width: 25%;
+    left: 60px;
+    top: 210px; 
+    width: 750px;
+    margin-left: 10%;
 }
 
 
 #hang img{
-    position: absolute;
-    top: 28%;
-    right: 59%;
+    position: relative;
+    top: 0px;
+    left: 1000px;
     height: 830px;
-    transform: scale(.6);
+    transform: scale(1.1);
     z-index: -3;
+    margin-left: 10%;
 }
 
 #quote-text{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(10%, -50%);
+    position: relative;
+    top: -280px;
+    left: 500px;
 }
 
 
 #tv {
     font-size: 30px;
     font-weight: bold; 
+
 }
 
 #tv img{
-    position: absolute;
-    top: 19.8%;
-    left: 50%;
+    position: relative;
+    top: 210px;
+    left: 300px;
     transform: scale(1.1);
-    width: 50%;
+    width: 1300px;
 }
 
 #quote-container{
@@ -95,15 +101,17 @@ body {
 }
 
 #comments-section {
-    position: absolute;
-    right: 65%;
-    bottom: 9%;
+    position: relative;
+    left: 130px;
+    bottom: 1600px;
+    margin-left: 10%;
 }
 
 #statement-container{
-    position: absolute;
-    right: 72%;
-    bottom: 5%;
+    position: relative;
+    left: 100px;
+    bottom: 1500px;
+    margin-left: 10%
 }
 
 

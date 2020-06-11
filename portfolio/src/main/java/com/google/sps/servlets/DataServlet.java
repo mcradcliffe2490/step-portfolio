@@ -34,6 +34,8 @@ import java.util.Optional;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+    private int commentAmount = 5;
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -43,13 +45,20 @@ public class DataServlet extends HttpServlet {
         Gson gson = new Gson();
         ArrayList<String> commentsList = new ArrayList<>();
 
+        int userChoice = commentAmount;
+        if ( userChoice == -1) userChoice = 5; 
+        int numOfComments = 0;
+        
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()) {
             commentsList.add((String) entity.getProperty("comment-data"));
+            numOfComments++; 
+            if (numOfComments == userChoice) break; 
         }
 
         response.setContentType("application/json;");
         response.getWriter().println(gson.toJson(commentsList));
+
     }
 
     @Override
@@ -65,13 +74,39 @@ public class DataServlet extends HttpServlet {
 
         datastore.put(commentsEntity);
 
+        commentAmount = getCommentAmount(request);
+
         response.sendRedirect("/index.html");
     }
 
     private Optional<String> getParameter(HttpServletRequest request, String fieldName) {
-    String value = request.getParameter(fieldName);
-    Optional<String> opt = Optional.ofNullable(value);
+        String value = request.getParameter(fieldName);
+        Optional<String> opt = Optional.ofNullable(value);
 
-    return opt;
+        return opt;
+    }
+
+    private int getCommentAmount(HttpServletRequest request) {
+        // Get the input from the form.
+        String userChoiceString = request.getParameter("num-of-comments");
+
+        // Convert the input to an int.
+        int userChoice;
+        try {
+            userChoice = Integer.parseInt(userChoiceString);
+            } catch (NumberFormatException e) {
+                System.err.println("Could not convert to int: " + userChoiceString);
+                return -1;
+            }
+
+        // Check that the input is between 1 and 10.
+        if (userChoice < 1 || userChoice > 10) {
+            System.err.println("User choice is out of range: " + userChoiceString);
+            return -1;
+        }
+            return userChoice;
     }
 }
+
+
+

@@ -15,6 +15,8 @@
 /**
  * Adds a random quote to the page.
  */
+const numComments = "/data?num-of-comments=5";
+
 function addRandomQuote() {
   const quotes =
       [ "If you're the CEO of a company, and you're dumb enough" +
@@ -72,7 +74,7 @@ function addRandomQuote() {
 
 }
 
-
+ 
 
   async function getServerResponse() {
     fetch("/data").then(response => response.json()).then((statement) => {
@@ -80,3 +82,9 @@ function addRandomQuote() {
     statementContainer.innerText = statement; 
     });
   }
+
+  async function deleteComments() {
+      fetch("/delete-data", {method: 'POST'}).then(response => response.json()).then(data => console.log(data)); 
+  }
+
+  
