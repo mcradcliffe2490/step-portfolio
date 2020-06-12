@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import java.util.Optional;
 
-
+/*Servlet to handle the comment data for My Portfolio webpage */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
@@ -80,8 +80,7 @@ public class DataServlet extends HttpServlet {
     }
 
     private Optional<String> getParameter(HttpServletRequest request, String fieldName) {
-        String value = request.getParameter(fieldName);
-        Optional<String> opt = Optional.ofNullable(value);
+        Optional<String> opt = Optional.ofNullable(request.getParameter(fieldName));
 
         return opt;
     }
