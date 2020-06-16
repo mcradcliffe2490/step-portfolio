@@ -14,36 +14,46 @@
 
 package com.google.sps.servlets;
 
-import java.io.IOException;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.gson.Gson;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.List;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.ArrayList;
-import com.google.gson.Gson;
-import java.util.Optional;
 
-/*Servlet to handle the comment data for My Portfolio webpage */
+
+
+/* Servlet to handle the comment data for My Portfolio webpage */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-    private int commentAmount = 5;
+    private int commentAmount;
+    private DatastoreService datastore;
+    private Gson gson;
 
+    @Override
+    public void init() {
+
+        commentAmount = 5;
+        datastore = DatastoreServiceFactory.getDatastoreService();
+        gson = new Gson();        
+    }
+   
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Query query = new Query("Comments").addSort("comment-data", SortDirection.DESCENDING);
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-
-        Gson gson = new Gson();
-        ArrayList<String> commentsList = new ArrayList<>();
+        List<String> commentsList = new ArrayList<>();
 
         int userChoice = commentAmount;
         if ( userChoice == -1) userChoice = 5; 
@@ -64,11 +74,9 @@ public class DataServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String text = getParameter(request, "comments-input").orElse("");
-        Gson gson = new Gson();
 
         response.setContentType("application/json");
 
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         Entity commentsEntity = new Entity("Comments");
         commentsEntity.setProperty("comment-data", gson.toJson(text));
 

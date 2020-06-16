@@ -111,7 +111,16 @@ body {
     position: relative;
     left: 100px;
     bottom: 1500px;
-    margin-left: 10%
+    margin-left: 10%;
+}
+
+#map {
+    position: relative;
+    border: thin solid black;
+    height: 500px;
+    width: 500px;
+    margin-left: 10%;
+    bottom: 400px;
 }
 
 
