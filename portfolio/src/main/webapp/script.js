@@ -86,7 +86,7 @@ function addRandomQuote() {
   }
 
   function createMap() {
-    /* Variable names are based on the name of the resurant/buinsess they are pointing to*/
+    /* Variable names are based on the name of the restaurant/business they are pointing to */
     var pappasLoaction = {lat: 39.47169, lng: -76.622223};
     var shipsLoacation = {lat: 39.2715, lng: -76.7350};
     var shipsMarker;
@@ -231,15 +231,47 @@ function addRandomQuote() {
             
         ]  
     });
-    
+
+    var infowindow;
+
     shipsMarker = new google.maps.Marker({
         position: shipsLoacation, 
-        map: map
+        map: map,
+        title: "Ship's Cafe"
         });
     pappasMarker = new google.maps.Marker({
         position: pappasLoaction, 
-        map: map
+        map: map,
+        title: "Pappas Resturant and Sports Bar"
         });
+
+    shipsMarker.addListener('click', function() {
+        infowindow = new google.maps.InfoWindow({
+            content: "<div style='float:left'>" +
+            "<img src='/images/ships.jpg' width= 350 height=200></div>" +
+            "<div style='float:right; padding: 10px;'>" +
+            "<b>Ships Cafe</b>" +
+            "<br/>828 Frederick Rd" +
+            "<br/> Catonsville, MD 2122</div>"
+        });
+        infowindow.open(map, shipsMarker);
+    });
+
+    pappasMarker.addListener('click', function() {
+        infowindow = new google.maps.InfoWindow({
+            content: "<div style='float:left'>" +
+            "<img src='/images/pappas-food.jpg' width= 250 height= 200></div>" +
+            "<div style='float:right; padding: 10px;'>" +
+            "<b>Pappas Resturant and Sports Bar</b>" +
+            "<br/>550 Cranbrook Rd" +
+            "<br/> Cockeysville, MD 21030</div>"
+        });
+        infowindow.open(map, pappasMarker);
+    });
+
+
+
 }
+
 
   
