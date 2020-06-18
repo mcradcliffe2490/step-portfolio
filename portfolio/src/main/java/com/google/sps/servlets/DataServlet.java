@@ -49,7 +49,7 @@ public class DataServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Query query = new Query("Comments").addSort("comment-data", SortDirection.DESCENDING);
+        Query query = new Query("Comments").addSort("timestamp", SortDirection.DESCENDING);
         List<String> commentsList = new ArrayList<>();
 
         int userChoice = commentAmount;
@@ -76,6 +76,7 @@ public class DataServlet extends HttpServlet {
 
         Entity commentsEntity = new Entity("Comments");
         commentsEntity.setProperty("comment-data", gson.toJson(text));
+        commentsEntity.setProperty("timestamp", System.currentTimeMillis());
 
         datastore.put(commentsEntity);
 
