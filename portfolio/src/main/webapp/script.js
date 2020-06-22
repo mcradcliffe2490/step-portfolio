@@ -81,6 +81,10 @@ function addRandomQuote() {
     });
   }
 
+  function getLoginStatus() {
+    document.location.href = "/login";
+  }
+
   async function deleteComments() {
       fetch("/delete-data", {method: 'POST'}).then(response => response.json()).then(data => console.log(data)); 
   }

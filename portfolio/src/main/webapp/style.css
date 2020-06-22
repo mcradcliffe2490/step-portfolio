@@ -58,6 +58,13 @@ body {
     height: auto;
 }
 
+#loginout-link {
+    postion: relative;
+    z-index: 3;
+    height:auto;
+    margin-left: 10%;
+}
+
 
 #hang img{
     position: relative;
@@ -124,7 +131,7 @@ body {
     width: 500px;
     margin-left: 10%;
     bottom: 400px;
-    left: 1500px; 
+    left: 1700px; 
 }
 
 
