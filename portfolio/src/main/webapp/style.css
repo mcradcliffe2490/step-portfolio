@@ -46,7 +46,6 @@ body {
     z-index: 1;
 }
 
-
 #about-me{
     position: relative;
     color: black;
@@ -65,7 +64,6 @@ body {
     margin-left: 10%;
 }
 
-
 #hang img{
     position: relative;
     top: 0px;
@@ -81,7 +79,6 @@ body {
     top: -280px;
     left: 500px;
 }
-
 
 #tv {
     font-size: 30px;
@@ -134,9 +131,7 @@ body {
     left: 1700px; 
 }
 
-
 /* Code for the Red Button for TV shows. */
-
 .push_button {
 	position: relative;
 	width:220px;
