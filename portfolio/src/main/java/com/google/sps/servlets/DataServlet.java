@@ -20,6 +20,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,19 +39,21 @@ public class DataServlet extends HttpServlet {
     private int commentAmount;
     private DatastoreService datastore;
     private Gson gson;
+    private UserService userService;
 
     @Override
     public void init() {
 
         commentAmount = 5;
         datastore = DatastoreServiceFactory.getDatastoreService();
-        gson = new Gson();        
+        gson = new Gson();
+        userService = UserServiceFactory.getUserService();        
     }
    
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Query query = new Query("Comments").addSort("comment-data", SortDirection.DESCENDING);
+        Query query = new Query("Comments").addSort("timestamp", SortDirection.DESCENDING);
         List<String> commentsList = new ArrayList<>();
 
         int userChoice = commentAmount;
@@ -58,7 +62,7 @@ public class DataServlet extends HttpServlet {
         
         PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()) {
-            commentsList.add((String) entity.getProperty("comment-data"));
+            commentsList.add((String) entity.getProperty("email") + ": " + entity.getProperty("comment-data"));
             numOfComments++; 
             if (numOfComments == userChoice) break; 
         }
@@ -71,11 +75,19 @@ public class DataServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String text = getParameter(request, "comments-input").orElse("");
+        String userEmail;
+        if(userService.isUserLoggedIn()) {
+            userEmail = userService.getCurrentUser().getEmail();
+        } else {
+            userEmail = "Anonymous";
+        }
 
         response.setContentType("application/json");
 
         Entity commentsEntity = new Entity("Comments");
         commentsEntity.setProperty("comment-data", gson.toJson(text));
+        commentsEntity.setProperty("timestamp", System.currentTimeMillis());
+        commentsEntity.setProperty("email", userEmail); 
 
         datastore.put(commentsEntity);
 

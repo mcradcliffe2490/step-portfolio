@@ -68,15 +68,20 @@
                 <h1>Pick the number of comments you want</h1>
                 <input type="number" name="num-of-comments" min="1" max="10" value="5" onchange= "getCommentAmount()">
             </form>
-            <form action='/data-delete' method "POST" name ="delete-comments">
+            <form name ="delete-comments">
                 <h1>Delete all current comments</h1>
                 <input type="submit" onclick = "deleteComments()">
             </form>
         </div>
         
         <div id="statement-container"></div>
-    </div>
-    <div id="map"></div>
+
+        <div id="loginout-link">
+            <button onclick = "getLoginStatus()">Login</button>
+        </div>
         
+        <div id="map"></div>
+        
+    </div>   
   </body>
 </html>

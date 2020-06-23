@@ -11,16 +11,12 @@ p {
 }
 
 #container {
-    width: 1000px;
+    width: 500px;
 }
 
 #content {
     width: 650px;
     z-index: -1;
-}
-
-#greeting-container {
-    margin-top: 20px;
 }
 
 body {
@@ -50,25 +46,30 @@ body {
     z-index: 1;
 }
 
-
 #about-me{
     position: relative;
     color: black;
     z-index: 2; 
-    transform: scale(1.4);
     left: 60px;
     top: 210px; 
     width: 750px;
     margin-left: 10%;
+    height: auto;
 }
 
+#loginout-link {
+    postion: relative;
+    z-index: 3;
+    height:auto;
+    margin-left: 10%;
+}
 
 #hang img{
     position: relative;
     top: 0px;
     left: 1000px;
-    height: 830px;
-    transform: scale(1.1);
+    height: auto;
+    width: 100%;
     z-index: -3;
     margin-left: 10%;
 }
@@ -79,7 +80,6 @@ body {
     left: 500px;
 }
 
-
 #tv {
     font-size: 30px;
     font-weight: bold; 
@@ -88,7 +88,7 @@ body {
 
 #tv img{
     position: relative;
-    top: 210px;
+    top: 300px;
     left: 300px;
     transform: scale(1.1);
     width: 1300px;
@@ -96,22 +96,29 @@ body {
 
 #quote-container{
     background-color: lightgrey; 
-    width: 35%;
-    height: 30%; 
+    width: 500px;
+    height: 300px; 
 }
 
 #comments-section {
-    position: relative;
-    left: 130px;
-    bottom: 1600px;
-    margin-left: 10%;
+    position: absolute;
+    transform: scale(.8);
+    margin:0 auto;
+    left: 0;
+    right: 1050px;
+	top: 490px;
+	width:469px;
+	height:95px;
 }
 
 #statement-container{
-    position: relative;
-    left: 100px;
-    bottom: 1500px;
-    margin-left: 10%;
+    position: absolute;
+    margin:0 auto;
+    left: 200px;
+    right: 0;
+	top: 900px;
+	width:600px;
+	height:95px;
 }
 
 #map {
@@ -121,11 +128,10 @@ body {
     width: 500px;
     margin-left: 10%;
     bottom: 400px;
+    left: 1700px; 
 }
 
-
 /* Code for the Red Button for TV shows. */
-
 .push_button {
 	position: relative;
 	width:220px;
